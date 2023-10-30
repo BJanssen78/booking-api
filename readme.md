@@ -18,5 +18,5 @@ A back-end app that allow users to book there hotel
 
 - <a href="https://www.wincacademy.nl/" alt="winc academy">Winc Academy</a>
 - Winc Slack Channels
-- ChatGPT
+- <a href="https://chat.openai.com/" alt="Chat GPT">ChatGPT</a>
 - <a href="https://www.google.com/" alt="google">Google</a>
