@@ -8,3 +8,86 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DB_URL")
   relationMode = "prisma"
 }
+
+model User{
+  id          String  @id @default(uuid())
+  username    String  @unique
+  password    String
+  name        String
+  email       String  @unique
+  phoneNumber String  @unique
+  pictureUrl  String
+  Booking     Booking[]
+  Reviews     Review[]
+}
+
+model Property{
+  id              String    @id @default(uuid())
+  hostId          String    //must be from model Host
+  title           String
+  description     String
+  location        String
+  pricePerNight   Decimal
+  bedroomCount    Int
+  bathroomCount   Int
+  maxGuestCount   Int
+  rating          Int
+  Booking         Booking[]
+  Reviews         Review[]
+  Amenity         Amenity[]
+
+  host Host @relation(fields: [hostId], references: [id])
+
+  @@index([hostId])
+  @@index([title])
+  @@index([location])
+}
+
+model Review{
+  id            String    @id @default(uuid())
+  userId        String
+  propertyId    String
+  rating        Int
+  comment       String
+
+  user          User      @relation(fields: [userId], references: [id])
+  property      Property  @relation(fields: [propertyId], references: [id])
+
+  @@index([propertyId])
+  @@index([userId])
+}
+
+model Host{
+  id          String    @id    @default(uuid())
+  username    String    @unique
+  password    String
+  name        String
+  email       String    @unique
+  phoneNumber String    @unique
+  pictureUrl  String
+  aboutMe     String
+  listings    Property[]
+}
+
+model Booking{
+  id            String  @id @default(uuid())
+  userId        String    //must be from model User
+  propertyId    String
+  checkInDate   DateTime
+  checkOutDate  DateTime
+  numberOfGeust Int
+  totalPrice    Int
+  bookingStatus String
+
+  user      User      @relation(fields: [userId], references: [id])
+  property  Property  @relation(fields: [propertyId], references: [id])
+
+  @@index([userId])
+  @@index([propertyId])
+}
+
+model Amenity{
+  id          String    @id   @default(uuid())
+  name        String
+  property    Property[]
+}
