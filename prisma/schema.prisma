@@ -3,91 +3,100 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
   shadowDatabaseUrl = env("SHADOW_DB_URL")
-  relationMode = "prisma"
+  relationMode      = "prisma"
 }
 
-model User{
-  id          String  @id @default(uuid())
-  username    String  @unique
+// All fields related to indentify a person, must be and are unique values.
+// Profile pictures are not mandatory
+// 1 user can have many bookings and many reviews
+// Reviews can have only 1 user and 1 property
+// Property can have many reviews and many bookings, but only 1 host and many amenity's
+// A host can have many property's
+// Amenity's can have many property's
+
+model User {
+  id          String    @id @default(uuid())
+  username    String    @unique
   password    String
   name        String
-  email       String  @unique
-  phoneNumber String  @unique
-  pictureUrl  String
+  email       String    @unique
+  phoneNumber String    @unique
+  profilePicture  String?
   Booking     Booking[]
   Reviews     Review[]
 }
 
-model Property{
-  id              String    @id @default(uuid())
-  hostId          String    //must be from model Host
-  title           String
-  description     String
-  location        String
-  pricePerNight   Decimal
-  bedroomCount    Int
-  bathroomCount   Int
-  maxGuestCount   Int
-  rating          Int
-  Booking         Booking[]
-  Reviews         Review[]
-  Amenity         Amenity[]
+model Property {
+  id            String    @id @default(uuid())
+  hostId        String //must be from model Host
+  title         String
+  description   String
+  location      String
+  pricePerNight Decimal   @db.Decimal(10, 2)
+  bedroomCount  Int
+  bathRoomCount Int
+  maxGuestCount Int
+  rating        Int
+  Booking       Booking[]
+  Reviews       Review[]
+  Amenity       Amenity[]
 
-  host Host @relation(fields: [hostId], references: [id])
+  host Host @relation(fields: [hostId], references: [id], onUpdate: Cascade, onDelete: Cascade) // all related field will be updated or deleted
 
   @@index([hostId])
   @@index([title])
   @@index([location])
 }
 
-model Review{
-  id            String    @id @default(uuid())
-  userId        String
-  propertyId    String
-  rating        Int
-  comment       String
+model Review {
+  id         String  @id @default(uuid())
+  userId     String
+  propertyId String
+  rating     Int     @default(0)
+  comment    String?
 
-  user          User      @relation(fields: [userId], references: [id])
-  property      Property  @relation(fields: [propertyId], references: [id])
+  user     User     @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  property Property @relation(fields: [propertyId], references: [id], onUpdate: Cascade, onDelete: Cascade)
 
   @@index([propertyId])
   @@index([userId])
 }
 
-model Host{
-  id          String    @id    @default(uuid())
-  username    String    @unique
+model Host {
+  id          String     @id @default(uuid())
+  username    String     @unique
   password    String
   name        String
-  email       String    @unique
-  phoneNumber String    @unique
-  pictureUrl  String
+  email       String     @unique
+  phoneNumber String     @unique
+  profilePicture  String?
   aboutMe     String
-  listings    Property[]
+  property    Property[]
 }
 
-model Booking{
-  id            String  @id @default(uuid())
-  userId        String    //must be from model User
+model Booking {
+  id            String   @id @default(uuid())
+  userId        String //must be from model User
   propertyId    String
-  checkInDate   DateTime
-  checkOutDate  DateTime
-  numberOfGeust Int
-  totalPrice    Int
+  checkinDate   DateTime
+  checkoutDate  DateTime
+  numberOfGuests Int
+  totalPrice    Decimal  @db.Decimal(10, 2)
   bookingStatus String
 
-  user      User      @relation(fields: [userId], references: [id])
-  property  Property  @relation(fields: [propertyId], references: [id])
+  user     User     @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade) // all related field will be updated or deleted
+  property Property @relation(fields: [propertyId], references: [id], onUpdate: Cascade, onDelete: Cascade) // all related field will be updated or deleted
 
   @@index([userId])
   @@index([propertyId])
 }
 
-model Amenity{
-  id          String    @id   @default(uuid())
-  name        String
-  property    Property[]
+model Amenity {
+  id       String     @id @default(uuid())
+  name     String
+  Property Property[]
+
 }
