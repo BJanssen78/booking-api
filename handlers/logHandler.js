@@ -1,14 +1,17 @@
 import logger from "../logs/log.js";
 
-const log = (req, res, next) => {
+const logHandler = (req, res, next) => {
   const start = new Date();
 
   next();
 
   const ms = new Date() - start;
+  const currentDate = new Date().toLocaleDateString();
+  const currentTime = new Date().toLocaleTimeString();
+
   logger.info(
-    `${req.method} ${req.originalUrl}. Status: ${res.statusCode}. Duration: ${ms} ms`
+    `Timestamp: ${currentDate}, ${currentTime} Method: ${req.method} ${req.originalUrl}. Status: ${res.statusCode}. Duration: ${ms} ms`
   );
 };
 
-export default log;
+export default logHandler;
