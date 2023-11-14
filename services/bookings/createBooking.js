@@ -5,10 +5,12 @@ const createBooking = async (
   propertyId,
   checkinDate,
   checkoutDate,
-  numberOfGeust,
+  numberOfGuests,
   totalPrice,
   bookingStatus
 ) => {
+  console.log("the number of guest are: " + numberOfGuests);
+
   const prisma = new PrismaClient();
 
   return prisma.booking.create({
@@ -17,7 +19,7 @@ const createBooking = async (
       propertyId,
       checkinDate,
       checkoutDate,
-      numberOfGeust,
+      numberOfGuests,
       totalPrice,
       bookingStatus,
     },

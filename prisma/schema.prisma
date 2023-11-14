@@ -66,26 +66,26 @@ model Review {
 }
 
 model Host {
-  id          String     @id @default(uuid())
-  username    String     @unique
-  password    String
-  name        String
-  email       String     @unique
-  phoneNumber String     @unique
+  id              String     @id @default(uuid())
+  username        String     @unique
+  password        String
+  name            String
+  email           String     @unique
+  phoneNumber     String     @unique
   profilePicture  String?
-  aboutMe     String
-  property    Property[]
+  aboutMe         String
+  property        Property[]
 }
 
 model Booking {
-  id            String   @id @default(uuid())
-  userId        String //must be from model User
-  propertyId    String
-  checkinDate   DateTime
-  checkoutDate  DateTime
-  numberOfGuests Int
-  totalPrice    Decimal  @db.Decimal(10, 2)
-  bookingStatus String
+  id              String    @id @default(uuid())
+  userId          String    @default(uuid())
+  propertyId      String    @default(uuid())
+  checkinDate     DateTime
+  checkoutDate    DateTime
+  numberOfGuests  Int
+  totalPrice      Decimal   @db.Decimal(10, 2)
+  bookingStatus   String
 
   user     User     @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade) // all related field will be updated or deleted
   property Property @relation(fields: [propertyId], references: [id], onUpdate: Cascade, onDelete: Cascade) // all related field will be updated or deleted
