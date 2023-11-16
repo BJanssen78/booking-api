@@ -31,21 +31,22 @@ bookingRouter.post("/", (req, res) => {
   const {
     userId,
     propertyId,
+    totalPrice,
+    bookingStatus,
     checkinDate,
     checkoutDate,
     numberOfGeust,
-    totalPrice,
-    bookingStatus,
   } = req.body;
   const newBooking = createBooking(
     userId,
     propertyId,
+    totalPrice,
+    bookingStatus,
     checkinDate,
     checkoutDate,
-    numberOfGeust,
-    totalPrice,
-    bookingStatus
+    numberOfGeust
   );
+  console.log(req.body);
   res.status(201).json(newBooking);
 });
 

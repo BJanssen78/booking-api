@@ -11,7 +11,6 @@ const app = express();
 
 app.use(express.json());
 app.use(logHandler);
-
 app.use(checkHeader);
 // TODO check where the undefinded comes from.
 

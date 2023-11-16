@@ -15,6 +15,7 @@ const logger = winston.createLogger({
     })(),
     winston.format.json()
   ),
+
   defaultMeta: { service: "booking-api" },
   transports: [
     new winston.transports.File({
