@@ -1,12 +1,16 @@
 import express from "express";
 import getAllBookings from "../services/bookings/getAllBookings.js";
 import getBookingById from "../services/bookings/getBookingById.js";
+import updateBookingById from "../services/bookings/updateBooking.js";
 import NotFoundError from "../handlers/notFoundHandler.js";
 import createBooking from "../services/bookings/createBooking.js";
+import deleteBooking from "../services/bookings/deleteBooking.js";
 
 const bookingRouter = express.Router();
 
 bookingRouter.get("/", async (req, res) => {
+  //TODO add the query options
+  //TEST the query
   const { userId, bookingStatus } = req.params;
   const allBookings = await getAllBookings(userId, bookingStatus);
   res.status(200).json(allBookings);
@@ -28,6 +32,7 @@ bookingRouter.get(
 );
 
 bookingRouter.post("/", (req, res) => {
+  //FIXME data is getting scrambled, and get's missing
   const {
     userId,
     propertyId,
@@ -48,6 +53,51 @@ bookingRouter.post("/", (req, res) => {
   );
   console.log(req.body);
   res.status(201).json(newBooking);
+});
+
+bookingRouter.put(
+  "/:id",
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const {
+        userId,
+        propertyId,
+        checkinDate,
+        checkoutDate,
+        numberOfGuest,
+        totalPrice,
+        bookingStatus,
+      } = req.body;
+      const updateBooking = await updateBookingById(
+        id,
+        userId,
+        propertyId,
+        checkinDate,
+        checkoutDate,
+        numberOfGuest,
+        totalPrice,
+        bookingStatus
+      );
+      res.status(200).json(updateBooking);
+    } catch (error) {
+      next(error);
+    }
+  },
+  NotFoundError
+);
+
+bookingRouter.delete("/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const deleteBookingById = deleteBooking(id);
+
+    res.status(200).json({
+      message: `Booking with ID ${deleteBookingById} was deleted`,
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
 export default bookingRouter;

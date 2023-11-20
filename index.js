@@ -13,6 +13,7 @@ app.use(express.json());
 app.use(logHandler);
 app.use(checkHeader);
 // TODO check where the undefinded comes from.
+// FIXME take out the undefined
 
 app.use("/users", userRouter);
 app.use("/login", loginRouter);
