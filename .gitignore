@@ -15,4 +15,4 @@ node_modules
 launch.json
 
 # vs code files
-*.code-workspace*
+*.code-workspace
