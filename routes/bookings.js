@@ -5,6 +5,7 @@ import updateBookingById from "../services/bookings/updateBooking.js";
 import NotFoundError from "../handlers/notFoundHandler.js";
 import createBooking from "../services/bookings/createBooking.js";
 import deleteBooking from "../services/bookings/deleteBooking.js";
+import authHandler from "../handlers/authHandler.js";
 
 const bookingRouter = express.Router();
 
@@ -31,8 +32,7 @@ bookingRouter.get(
   NotFoundError
 );
 
-bookingRouter.post("/", (req, res) => {
-  //FIXME data is getting scrambled, and get's missing
+bookingRouter.post("/", authHandler, (req, res) => {
   const {
     userId,
     propertyId,
@@ -40,7 +40,7 @@ bookingRouter.post("/", (req, res) => {
     bookingStatus,
     checkinDate,
     checkoutDate,
-    numberOfGeust,
+    numberOfGuests,
   } = req.body;
   const newBooking = createBooking(
     userId,
@@ -49,35 +49,35 @@ bookingRouter.post("/", (req, res) => {
     bookingStatus,
     checkinDate,
     checkoutDate,
-    numberOfGeust
+    numberOfGuests
   );
-  console.log(req.body);
   res.status(201).json(newBooking);
 });
 
 bookingRouter.put(
   "/:id",
+  authHandler,
   async (req, res, next) => {
     try {
       const { id } = req.params;
       const {
         userId,
         propertyId,
-        checkinDate,
-        checkoutDate,
-        numberOfGuest,
         totalPrice,
         bookingStatus,
+        checkinDate,
+        checkoutDate,
+        numberOfGuests,
       } = req.body;
       const updateBooking = await updateBookingById(
         id,
         userId,
         propertyId,
+        totalPrice,
+        bookingStatus,
         checkinDate,
         checkoutDate,
-        numberOfGuest,
-        totalPrice,
-        bookingStatus
+        numberOfGuests
       );
       res.status(200).json(updateBooking);
     } catch (error) {
@@ -87,7 +87,7 @@ bookingRouter.put(
   NotFoundError
 );
 
-bookingRouter.delete("/:id", async (req, res, next) => {
+bookingRouter.delete("/:id", authHandler, async (req, res, next) => {
   try {
     const { id } = req.params;
     const deleteBookingById = deleteBooking(id);

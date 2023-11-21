@@ -100,3 +100,5 @@ model Amenity {
   Property Property[]
 
 }
+
+// TODO add a selection type to bookingStatus

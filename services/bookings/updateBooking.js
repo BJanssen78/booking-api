@@ -1,8 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import NotFoundError from "../../handlers/notFoundHandler.js";
 
-//TEST test the update function
-
 const updateBookingById = async (
   id,
   userId,
@@ -11,7 +9,7 @@ const updateBookingById = async (
   bookingStatus,
   checkinDate,
   checkoutDate,
-  numberOfGeust
+  numberOfGuests
 ) => {
   const prisma = new PrismaClient();
   const updateBooking = await prisma.booking.updateMany({
@@ -25,7 +23,7 @@ const updateBookingById = async (
       bookingStatus,
       checkinDate,
       checkoutDate,
-      numberOfGeust,
+      numberOfGuests,
     },
   });
   if (!updateBooking || updateBooking.count === 0) {

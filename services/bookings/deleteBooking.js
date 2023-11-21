@@ -1,8 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import NotFoundError from "../../handlers/notFoundHandler.js";
 
-//TEST test delete function.
-
 const deleteBooking = async (id) => {
   const prisma = new PrismaClient();
   const deleteBooking = await prisma.booking.deleteMany({

@@ -20,13 +20,12 @@ router.post("/", async (req, res) => {
 
     const token = jwt.sign({ userId: user.id }, secretKey);
     res.status(200).json({ message: "Successfully logged in!", token });
+    console.log(token);
   } catch (error) {
     console.error("Database error:", error);
-    res
-      .status(500)
-      .json({
-        message: "Status code 500 : Internal server error, while login attempt",
-      });
+    res.status(500).json({
+      message: "Status code 500 : Internal server error, while login attempt",
+    });
   }
 });
 
