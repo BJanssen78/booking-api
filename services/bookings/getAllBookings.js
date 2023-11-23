@@ -1,14 +1,27 @@
 import { PrismaClient } from "@prisma/client";
 
-const getAllBookings = async (userId, bookingStatus) => {
+const getAllBookings = async (
+  userId,
+  bookingStatus,
+  // checkinDate,
+  checkinDateWithoutTime,
+  checkoutDate,
+  propertyId
+) => {
   const prisma = new PrismaClient();
-  console.log(userId);
-  console.error(userId);
+  // let checkinDate = checkinDateWithoutTime + "T23:59:59.999Z";
+  console.log(checkinDateWithoutTime);
+  // console.log(checkinDate);
 
   return prisma.booking.findMany({
     where: {
       userId,
       bookingStatus,
+      checkinDate: {
+        in: [checkinDateWithoutTime],
+      },
+      checkoutDate,
+      propertyId,
     },
   });
 };

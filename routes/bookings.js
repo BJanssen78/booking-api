@@ -10,10 +10,18 @@ import authHandler from "../handlers/authHandler.js";
 const bookingRouter = express.Router();
 
 bookingRouter.get("/", async (req, res) => {
-  //TODO add the query options
-  //TEST the query
-  const { userId, bookingStatus } = req.params;
-  const allBookings = await getAllBookings(userId, bookingStatus);
+  //[x] add the query options
+  //[x] the query
+
+  const { userId, bookingStatus, checkinDate, checkoutDate, propertyId } =
+    req.query;
+  const allBookings = await getAllBookings(
+    userId,
+    bookingStatus,
+    checkinDate,
+    checkoutDate,
+    propertyId
+  );
   res.status(200).json(allBookings);
 });
 

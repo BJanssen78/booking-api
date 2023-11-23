@@ -38,7 +38,7 @@
       "checkoutDate": "2023-06-12T10:00:00.000Z",
       "numberOfGuests": 1,
       "totalPrice": 80.75,
-      "bookingStatus": "canceled"
+      "bookingStatus": "cancelled"
     },
     {
       "id": "b5678901-23de-f012-3456-789abcdef012",
