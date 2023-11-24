@@ -17,9 +17,7 @@ const getAllBookings = async (
     where: {
       userId,
       bookingStatus,
-      checkinDate: {
-        in: [checkinDateWithoutTime],
-      },
+      checkinDate: { in: Date[checkinDateWithoutTime] },
       checkoutDate,
       propertyId,
     },
