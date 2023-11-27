@@ -1,6 +1,6 @@
 // [x] Login
 
-// [ ] Create, view, update, and delete users
+// [x] Create, view, update, and delete users
 
 // [ ] Create, view, update, and delete hosts
 
