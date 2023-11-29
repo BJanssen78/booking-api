@@ -72,6 +72,9 @@ userRouter.delete("/:id", authHandler, async (req, res, next) => {
   try {
     const { id } = req.params;
 
+    //FIXME deleteUserById message
+    const deleteUserById = deleteUser(id);
+
     res.status(200).json({
       message: `User with ID ${id} was deleted`,
     });

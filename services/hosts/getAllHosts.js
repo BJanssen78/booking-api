@@ -1,16 +1,16 @@
 import { PrismaClient } from "@prisma/client";
 import NotFoundError from "../../handlers/notFoundHandler.js";
 
-const getAllUsers = async () => {
+const getAllHosts = async () => {
   const prisma = new PrismaClient();
 
   try {
-    const users = await prisma.user.findMany();
-    return users;
+    const hosts = await prisma.host.findMany();
+    return hosts;
   } catch (error) {
-    console.log("error fetching all users", error);
+    console.log("error fetching all hosts", error);
     throw new NotFoundError(error);
   }
 };
 
-export default getAllUsers;
+export default getAllHosts;

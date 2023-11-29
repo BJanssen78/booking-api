@@ -2,7 +2,7 @@
 
 // [x] Create, view, update, and delete users
 
-// [ ] Create, view, update, and delete hosts
+// [x] Create, view, update, and delete hosts
 
 // [ ] Create, view, update, and delete properties
 
@@ -18,7 +18,7 @@
 
 // [x] create error handler
 
-// [ ] /users/:id: GET (Fetch a single user), PUT (Update a user), DELETE (Remove a user)
+// [x] /users/:id: GET (Fetch a single user), PUT (Update a user), DELETE (Remove a user)
 
 // [ ] Create the same CRUD API endpoints as described in /users and /users:id for hosts, properties, amenities, bookings, and reviews.
 
