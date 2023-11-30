@@ -34,13 +34,14 @@ bookingRouter.get(
 
       res.status(200).json(booking);
     } catch (error) {
+      res.status(500).json({ error: "Internal Server Error" });
       next(error);
     }
   },
   NotFoundError
 );
 
-bookingRouter.post("/", authHandler, (req, res) => {
+bookingRouter.post("/", authHandler, async (req, res) => {
   const {
     userId,
     propertyId,
@@ -50,16 +51,22 @@ bookingRouter.post("/", authHandler, (req, res) => {
     checkoutDate,
     numberOfGuests,
   } = req.body;
-  const newBooking = createBooking(
-    userId,
-    propertyId,
-    totalPrice,
-    bookingStatus,
-    checkinDate,
-    checkoutDate,
-    numberOfGuests
-  );
-  res.status(201).json(newBooking);
+  try {
+    const newBooking = createBooking(
+      userId,
+      propertyId,
+      totalPrice,
+      bookingStatus,
+      checkinDate,
+      checkoutDate,
+      numberOfGuests
+    );
+    res.status(201).json(newBooking);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+    next(error);
+  }
 });
 
 bookingRouter.put(
@@ -89,6 +96,7 @@ bookingRouter.put(
       );
       res.status(200).json(updateBooking);
     } catch (error) {
+      res.status(500).json({ error: "Internal Server Error" });
       next(error);
     }
   },
@@ -104,6 +112,7 @@ bookingRouter.delete("/:id", authHandler, async (req, res, next) => {
       message: `Booking with ID ${deleteBookingById} was deleted`,
     });
   } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
     next(error);
   }
 });

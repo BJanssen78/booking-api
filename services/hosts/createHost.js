@@ -7,21 +7,32 @@ const createHost = async (
   email,
   phoneNumber,
   profilePicture,
-  aboutMe
+  aboutMe,
+  res // pass the response object as a parameter
 ) => {
   const prisma = new PrismaClient();
 
-  return prisma.host.create({
-    data: {
-      username,
-      password,
-      name,
-      email,
-      phoneNumber,
-      profilePicture,
-      aboutMe,
-    },
-  });
+  try {
+    const host = await prisma.host.create({
+      data: {
+        username,
+        password,
+        name,
+        email,
+        phoneNumber,
+        profilePicture,
+        aboutMe,
+      },
+    });
+
+    // Send a success response
+    res.json(host);
+  } catch (error) {
+    console.error(error);
+
+    // Send an error response
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 };
 
 export default createHost;

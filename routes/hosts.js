@@ -23,13 +23,14 @@ hostRouter.get(
 
       res.status(200).json(host);
     } catch (error) {
+      res.status(500).json({ error: "Internal Server Error" });
       next(error);
     }
   },
   NotFoundError
 );
 
-hostRouter.post("/", authHandler, (req, res) => {
+hostRouter.post("/", authHandler, async (req, res) => {
   const {
     username,
     password,
@@ -39,16 +40,24 @@ hostRouter.post("/", authHandler, (req, res) => {
     profilePicture,
     aboutMe,
   } = req.body;
-  const newHost = createHost(
-    username,
-    password,
-    name,
-    email,
-    phoneNumber,
-    profilePicture,
-    aboutMe
-  );
-  res.status(201).json(newHost);
+
+  try {
+    const newHost = await createHost(
+      username,
+      password,
+      name,
+      email,
+      phoneNumber,
+      profilePicture,
+      aboutMe,
+      res
+    );
+    res.status(201).json(newHost);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+    next(error);
+  }
 });
 
 hostRouter.put(
@@ -78,6 +87,7 @@ hostRouter.put(
       );
       res.status(200).json(updateUser);
     } catch (error) {
+      res.status(500).json({ error: "Internal Server Error" });
       next(error);
     }
   },
@@ -94,6 +104,7 @@ hostRouter.delete("/:id", authHandler, async (req, res, next) => {
       message: `Host with ID ${id} was deleted, ${deleteHostById}`,
     });
   } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
     next(error);
   }
 });

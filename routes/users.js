@@ -23,24 +23,30 @@ userRouter.get(
 
       res.status(200).json(user);
     } catch (error) {
+      res.status(500).json({ error: "Internal Server Error" });
       next(error);
     }
   },
   NotFoundError
 );
 
-userRouter.post("/", authHandler, (req, res) => {
+userRouter.post("/", authHandler, async (req, res) => {
   const { username, password, name, email, phoneNumber, profilePicture } =
     req.body;
-  const newUser = createUser(
-    username,
-    password,
-    name,
-    email,
-    phoneNumber,
-    profilePicture
-  );
-  res.status(201).json(newUser);
+  try {
+    const newUser = createUser(
+      username,
+      password,
+      name,
+      email,
+      phoneNumber,
+      profilePicture
+    );
+    res.status(201).json(newUser);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+    next(error);
+  }
 });
 
 userRouter.put(
@@ -62,6 +68,7 @@ userRouter.put(
       );
       res.status(200).json(updateUser);
     } catch (error) {
+      res.status(500).json({ error: "Internal Server Error" });
       next(error);
     }
   },
@@ -79,6 +86,7 @@ userRouter.delete("/:id", authHandler, async (req, res, next) => {
       message: `User with ID ${id} was deleted`,
     });
   } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
     next(error);
   }
 });
