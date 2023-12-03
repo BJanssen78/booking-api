@@ -4,7 +4,7 @@
 
 // [x] Create, view, update, and delete hosts
 
-// [ ] Create, view, update, and delete properties
+// [x] Create, view, update, and delete properties
 
 // [ ]  Create, view, update, and delete amenities
 

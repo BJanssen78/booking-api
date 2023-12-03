@@ -7,6 +7,7 @@ import errorHandler from "./handlers/errorhandler.js";
 import "dotenv/config";
 import checkHeader from "./handlers/checkHeader.js";
 import hostRouter from "./routes/hosts.js";
+import propertyRouter from "./routes/property.js";
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use("/users", userRouter);
 app.use("/login", loginRouter);
 app.use("/bookings", bookingRouter);
 app.use("/host", hostRouter);
+app.use("/property", propertyRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World!, here come my new hotel booking site");
