@@ -8,6 +8,8 @@ import "dotenv/config";
 import checkHeader from "./handlers/checkHeader.js";
 import hostRouter from "./routes/hosts.js";
 import propertyRouter from "./routes/property.js";
+import reviewRouter from "./routes/review.js";
+import amenityRouter from "./routes/amenity.js";
 
 const app = express();
 
@@ -20,6 +22,8 @@ app.use("/login", loginRouter);
 app.use("/bookings", bookingRouter);
 app.use("/host", hostRouter);
 app.use("/property", propertyRouter);
+app.use("/review", reviewRouter);
+app.use("/amenity", amenityRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World!, here come my new hotel booking site");

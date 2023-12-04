@@ -1,9 +1,13 @@
 import express from "express";
+
+// import functions
 import getAllHosts from "../services/hosts/getAllHosts.js";
 import getHostById from "../services/hosts/getHostById.js";
 import createHost from "../services/hosts/createHost.js";
 import updateHostById from "../services/hosts/updateHost.js";
 import deleteHost from "../services/hosts/deleteHost.js";
+
+// import handlers
 import NotFoundError from "../handlers/notFoundHandler.js";
 import authHandler from "../handlers/authHandler.js";
 
