@@ -10,7 +10,8 @@ import authHandler from "../handlers/authHandler.js";
 const userRouter = express.Router();
 
 userRouter.get("/", async (req, res) => {
-  const users = await getAllUsers();
+  const { username, email } = req.query;
+  const users = await getAllUsers(username, email);
   res.status(200).json(users);
 });
 

@@ -14,7 +14,8 @@ import authHandler from "../handlers/authHandler.js";
 const hostRouter = express.Router();
 
 hostRouter.get("/", async (req, res) => {
-  const host = await getAllHosts();
+  const { name } = req.query;
+  const host = await getAllHosts(name);
   res.status(200).json(host);
 });
 

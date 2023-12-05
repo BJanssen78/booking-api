@@ -40,7 +40,7 @@ const getAllBookings = async (
     : null;
 
   try {
-    const result = await prisma.booking.findMany({
+    const result = await prisma.booking.findFirst({
       where: {
         userId,
         bookingStatus,
@@ -69,6 +69,12 @@ const getAllBookings = async (
         propertyId,
       },
     });
+    if (result.length === 0) {
+      return {
+        status: 404,
+        message: "No match found with these parameter(s)",
+      };
+    }
 
     return result;
   } catch (error) {

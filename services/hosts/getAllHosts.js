@@ -1,11 +1,14 @@
 import { PrismaClient } from "@prisma/client";
 import NotFoundError from "../../handlers/notFoundHandler.js";
 
-const getAllHosts = async () => {
+const getAllHosts = async (name) => {
   const prisma = new PrismaClient();
 
   try {
     const hosts = await prisma.host.findMany({
+      where: {
+        name,
+      },
       select: {
         id: true,
         username: true,
@@ -16,6 +19,12 @@ const getAllHosts = async () => {
         aboutMe: true,
       },
     });
+    if (hosts.length === 0) {
+      return {
+        status: 404,
+        message: "Unknown host, check your spelling",
+      };
+    }
     return hosts;
   } catch (error) {
     console.log("error fetching all hosts", error);

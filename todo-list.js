@@ -22,7 +22,7 @@
 
 // [x] Create the same CRUD API endpoints as described in /users and /users:id for hosts, properties, amenities, bookings, and reviews.
 
-// [ ] Implement the query parameters that make the following endpoints possible: /properties?location=Amsterdam&pricePerNight=88&amenities=Wifi
+// [x] Implement the query parameters that make the following endpoints possible: /properties?location=Amsterdam&pricePerNight=88&amenities=Wifi
 //      bookings?userId=ee4b8bc3-4e54-4e0a-962d-d5a5570db4e7
 //      users?username=PietVanMolen
 //      users?email=piet@vanmolen.nl
