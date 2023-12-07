@@ -6,6 +6,8 @@ import createUser from "../services/users/createUser.js";
 import deleteUser from "../services/users/deleteUser.js";
 import NotFoundError from "../handlers/notFoundHandler.js";
 import authHandler from "../handlers/authHandler.js";
+import getBookingsByUser from "../services/bookings/getbookingsByUser.js";
+import getReviewByUser from "../services/reviews/getReviewByUser.js";
 
 const userRouter = express.Router();
 
@@ -25,6 +27,36 @@ userRouter.get(
       res.status(200).json(user);
     } catch (error) {
       res.status(500).json({ error: "Internal Server Error" });
+      next(error);
+    }
+  },
+  NotFoundError
+);
+
+userRouter.get(
+  "/:id/booking",
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const bookingsByUser = await getBookingsByUser(id);
+      res.status(200).json(bookingsByUser);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  },
+  NotFoundError
+);
+
+userRouter.get(
+  "/:id/review",
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const reviewsByUser = await getReviewByUser(id);
+      res.status(200).json(reviewsByUser);
+    } catch (error) {
+      console.log(error);
       next(error);
     }
   },
