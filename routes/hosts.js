@@ -103,10 +103,9 @@ hostRouter.delete("/:id", authHandler, async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const deleteHostById = deleteHost(id); //FIXME result in postman with [object promise]
-
+    const deleteHostById = await deleteHost(id);
     res.status(200).json({
-      message: `Host with ID ${id} was deleted, ${deleteHostById}`,
+      message: `Host with ID ${deleteHostById} was deleted`,
     });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });

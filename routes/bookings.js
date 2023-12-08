@@ -106,7 +106,7 @@ bookingRouter.put(
 bookingRouter.delete("/:id", authHandler, async (req, res, next) => {
   try {
     const { id } = req.params;
-    const deleteBookingById = deleteBooking(id);
+    const deleteBookingById = await deleteBooking(id);
 
     res.status(200).json({
       message: `Booking with ID ${deleteBookingById} was deleted`,

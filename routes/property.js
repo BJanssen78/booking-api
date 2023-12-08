@@ -110,10 +110,10 @@ propertyRouter.delete("/:id", authHandler, async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const deletePropertyById = deleteProperty(id); //FIXME result in postman with [object promise]
+    const deletePropertyById = await deleteProperty(id);
 
     res.status(200).json({
-      message: `Property with ID ${id} was deleted, ${deletePropertyById}`,
+      message: `Property with ID ${deletePropertyById} was deleted`,
     });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });

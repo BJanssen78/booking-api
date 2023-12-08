@@ -68,7 +68,7 @@ amenityRouter.delete("/:id", authHandler, async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const deleteAmenityById = deleteAmenity(id); //FIXME result in postman with [object promise]
+    const deleteAmenityById = await deleteAmenity(id);
 
     res.status(200).json({
       message: `Amenity with ID ${id} was deleted, ${deleteAmenityById}`,
