@@ -12,7 +12,7 @@
 
 // [x] Create, view, update, and delete reviews
 
-// [ ] * NOTE * In the Prisma model, we will add several collections to make data retrieval easier.
+// [x] * NOTE * In the Prisma model, we will add several collections to make data retrieval easier.
 // For example, when retrieving a property, we would like a list of all amenities it has and reviews.
 // You will find the extra Prisma collections we want to add to property and host in the instructions.
 
@@ -29,3 +29,18 @@
 //      users?username=PietVanMolen
 //      users?email=piet@vanmolen.nl
 //      hosts?name=Linda+Pollen
+
+// [ ] connect the amenity data to the property data
+
+// [x] add the query options
+// [x] the query
+
+// [x] All fields related to indentify a person, must be and are unique values.
+// [x] Profile pictures are not mandatory
+// [x] 1 user can have many bookings and many reviews
+// [x] Reviews can have only 1 user and 1 property
+// [x] Property can have many reviews and many bookings, but only 1 host and many amenity's
+// [x] A host can have many property's
+// [x] Amenity's can have many property's
+
+// [x] add a selection type to bookingStatus

@@ -9,13 +9,7 @@ datasource db {
   relationMode      = "prisma"
 }
 
-// [x] All fields related to indentify a person, must be and are unique values.
-// [x] Profile pictures are not mandatory
-// [ ] 1 user can have many bookings and many reviews
-// [ ] Reviews can have only 1 user and 1 property
-// [ ] Property can have many reviews and many bookings, but only 1 host and many amenity's
-// [ ] A host can have many property's
-// [ ] Amenity's can have many property's
+
 
 model User {
   id          String    @id @default(uuid())
@@ -100,8 +94,6 @@ model Amenity {
   Property Property[]
 
 }
-
-// [x] add a selection type to bookingStatus
 
 enum ItemType {
   pending

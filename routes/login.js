@@ -20,8 +20,6 @@ router.post("/", async (req, res) => {
 
     const token = jwt.sign({ userId: user.id }, secretKey);
     res.status(200).json({ message: "Successfully logged in!", token });
-    //[ ] before end remove this console.log
-    console.log(token);
   } catch (error) {
     console.error("Database error:", error);
     res.status(500).json({
