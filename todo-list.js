@@ -12,7 +12,9 @@
 
 // [x] Create, view, update, and delete reviews
 
-// [ ] * NOTE * In the Prisma model, we will add several collections to make data retrieval easier. For example, when retrieving a property, we would like a list of all amenities it has and reviews. You will find the extra Prisma collections we want to add to property and host in the instructions.
+// [ ] * NOTE * In the Prisma model, we will add several collections to make data retrieval easier.
+// For example, when retrieving a property, we would like a list of all amenities it has and reviews.
+// You will find the extra Prisma collections we want to add to property and host in the instructions.
 
 // [x] create logger. * Done *
 

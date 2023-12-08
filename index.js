@@ -15,7 +15,7 @@ const app = express();
 
 app.use(express.json());
 app.use(logHandler);
-app.use(checkHeader);
+// app.use(checkHeader);
 
 app.use("/users", userRouter);
 app.use("/login", loginRouter);
