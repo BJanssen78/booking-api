@@ -12,6 +12,16 @@ Dear teacher/mentor,
 I have used your test from postman, but on most test results, your test was denied access by the server.
 I was able to fix some, but still the most was denied access.
 
+---
+
+** NOTE: **
+
+The relation between Amenity and Property is still under review, help is asked in the slack channel.
+
+The code works, but the reference data is not set, nor in the assignment.
+
+---
+
 Short explanation of it's structure.
 
 - In the "data" folder you'll find the data provided by you.
