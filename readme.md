@@ -22,6 +22,8 @@ Short explanation of it's structure.
 - In the "services" folder you'll find the files that makes the end points possible and will execute the provided commands and params.
 - You'll also see a file called "todo-list.js", this file is exactly that, it helped me to keep track of this assignment.
 
+I have also added my logs, you'll find the in the "logs" folder, so you can see how all the testing went.
+
 I have no doubt that you'll find some things that might cause issues later on in my carreer (as in best practice), I'm eager to know what they are.
 If you have tips and trick, i would like to know.
 
@@ -35,7 +37,7 @@ This also works for `checkoutDate`.
 
 ### Disclaimer:
 
-A back-end app that allow users to book there hotel
+A back-end app that allow users to book there hotel.
 
 ---
 
